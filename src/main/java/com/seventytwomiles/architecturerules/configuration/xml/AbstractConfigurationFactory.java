@@ -1,23 +1,23 @@
-package com.seventytwomiles.architecturerules.configuration;
+package com.seventytwomiles.architecturerules.configuration.xml;
 
 /*
- * Copyright 2007 the original author or authors.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- *
- * For more infomration visit
- * http://architecturerules.googlecode.com/svn/docs/index.html
- */
+* Copyright 2007 the original author or authors.
+*
+* Licensed under the Apache License, Version 2.0 (the "License");
+* you may not use this file except in compliance with the License.
+* You may obtain a copy of the License at
+*
+* http://www.apache.org/licenses/LICENSE-2.0
+*
+* Unless required by applicable law or agreed to in writing, software
+* distributed under the License is distributed on an "AS IS" BASIS,
+* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+* See the License for the specific language governing permissions and
+* limitations under the License.
+*
+* For more infomration visit
+* http://architecturerules.googlecode.com/svn/docs/index.html
+*/
 
 
 import org.apache.commons.io.FileUtils;
@@ -47,14 +47,14 @@ public abstract class AbstractConfigurationFactory implements ConfigurationFacto
      *
      * @parameter rules Set
      */
-    protected final Collection rules = new HashSet();
+    final Collection rules = new HashSet();
 
     /**
      * <p>Set of  <code>Source</code> read from configuration file</p>
      *
      * @parameter sources Set
      */
-    protected final Collection sources = new HashSet();
+    final Collection sources = new HashSet();
 
     /**
      * <p>Weather or not to throw exception when no packages are found for a
@@ -62,14 +62,14 @@ public abstract class AbstractConfigurationFactory implements ConfigurationFacto
      *
      * @parameter throwExceptionWhenNoPackages boolean
      */
-    protected boolean throwExceptionWhenNoPackages = false;
+    boolean throwExceptionWhenNoPackages = false;
 
     /**
      * <p>Weather or not to check for cyclic dependencies.</p>
      *
      * @parameter doCyclicDependencyTest boolean
      */
-    protected boolean doCyclicDependencyTest = true;
+    boolean doCyclicDependencyTest = true;
 
 
     /**
@@ -78,7 +78,7 @@ public abstract class AbstractConfigurationFactory implements ConfigurationFacto
      * @param configuration String xml content to validate
      * @see "architecture-rules.dtd"
      */
-    protected abstract void validateConfigruation(final String configuration);
+    abstract void validateConfigruation(final String configuration);
 
 
     /**
@@ -88,7 +88,7 @@ public abstract class AbstractConfigurationFactory implements ConfigurationFacto
      * to load and read
      * @return String returns the contentsofo the configurationFile
      */
-    protected String getConfigurationAsXml(final String configurationFileName) {
+    String getConfigurationAsXml(final String configurationFileName) {
 
         /**
          * This code kinda sucks. First, an exeption is thrown if the resources
