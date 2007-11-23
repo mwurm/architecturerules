@@ -143,10 +143,8 @@ public class ArchitectureTestProgramatic extends AbstractArchitectureRulesConfig
         } catch (Exception e) {
 
             assertTrue(e instanceof DependencyConstraintException);
-
-            final String message = e.getMessage();
-            assertTrue(message.indexOf("test.com.seventytwomiles.web.spring") > -1);
-            assertTrue(message.indexOf("test.com.seventytwomiles.dao.hibernate") > -1);
+            assertTrue(e.getMessage().contains("test.com.seventytwomiles.web.spring"));
+            assertTrue(e.getMessage().contains("test.com.seventytwomiles.dao.hibernate"));
         }
     }
 }

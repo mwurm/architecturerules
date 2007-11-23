@@ -21,8 +21,8 @@ package com.seventytwomiles.architecturerules;
 
 
 import com.seventytwomiles.architecturerules.configuration.Configuration;
-import com.seventytwomiles.architecturerules.configuration.ConfigurationFactory;
 import com.seventytwomiles.architecturerules.configuration.UnmodifiableConfiguration;
+import com.seventytwomiles.architecturerules.configuration.xml.ConfigurationFactory;
 import com.seventytwomiles.architecturerules.configuration.xml.DigesterConfigurationFactory;
 import com.seventytwomiles.architecturerules.services.CyclicRedundencyService;
 import com.seventytwomiles.architecturerules.services.CyclicRedundencyServiceImpl;
@@ -70,7 +70,7 @@ public abstract class AbstractArchitectureRulesConfigurationTest extends TestCas
      *
      * @return Value for property <tt>configuration</tt>.
      */
-    protected Configuration getConfiguration() {
+    Configuration getConfiguration() {
 
         return configuration;
     }
@@ -96,7 +96,7 @@ public abstract class AbstractArchitectureRulesConfigurationTest extends TestCas
     }
 
 
-    protected final boolean doTests() {
+    boolean doTests() {
 
         final RulesService rulesService;
         rulesService = new RulesServiceImpl(new UnmodifiableConfiguration(configuration));
@@ -123,7 +123,7 @@ public abstract class AbstractArchitectureRulesConfigurationTest extends TestCas
      *
      * @return String name of the xml file including <samp>.xml</smmp>
      */
-    protected String getConfigurationFileName() {
+    String getConfigurationFileName() {
         return "";
     }
 
@@ -131,6 +131,6 @@ public abstract class AbstractArchitectureRulesConfigurationTest extends TestCas
     /**
      * <p>Implement this method and call {@link #doTests}</p>
      */
-    protected abstract void testArchitecture();
+    abstract void testArchitecture();
 
 }

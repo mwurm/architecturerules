@@ -1,25 +1,26 @@
 package com.seventytwomiles.architecturerules.exceptions;
 
 /*
- * Copyright 2007 the original author or authors.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- *
- * For more infomration visit
- * http://architecturerules.googlecode.com/svn/docs/index.html
- */
+* Copyright 2007 the original author or authors.
+*
+* Licensed under the Apache License, Version 2.0 (the "License");
+* you may not use this file except in compliance with the License.
+* You may obtain a copy of the License at
+*
+* http://www.apache.org/licenses/LICENSE-2.0
+*
+* Unless required by applicable law or agreed to in writing, software
+* distributed under the License is distributed on an "AS IS" BASIS,
+* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+* See the License for the specific language governing permissions and
+* limitations under the License.
+*
+* For more infomration visit
+* http://architecturerules.googlecode.com/svn/docs/index.html
+*/
 
 
+import java.util.Arrays;
 import java.util.Collection;
 
 
@@ -69,8 +70,6 @@ public class SourceNotFoundException extends RuntimeException {
     public SourceNotFoundException(final Collection sources) {
 
         super("unable to find any source files in given source directories {0}"
-                .replaceAll("\\{0}", sources.toString()).
-                replaceAll("\\[", "")
-                .replaceAll("\\]", ""));
+                .replace("{0}", Arrays.toString(sources.toArray())));
     }
 }

@@ -95,8 +95,7 @@ public class RuleTest extends TestCase {
 
         } catch (final AssertionFailedError e) {
 
-            final String message = e.getMessage();
-            assertTrue(message.indexOf("id") > -1);
+            assertTrue(e.getMessage().contains("id"));
         }
 
 
@@ -107,8 +106,7 @@ public class RuleTest extends TestCase {
 
         } catch (final AssertionFailedError e) {
 
-            final String message = e.getMessage();
-            assertTrue(message.indexOf("id") > -1);
+            assertTrue(e.getMessage().contains("id"));
         }
 
     }
@@ -136,8 +134,7 @@ public class RuleTest extends TestCase {
 
         } catch (final AssertionFailedError e) {
 
-            final String message = e.getMessage();
-            assertTrue(message.indexOf("id") > -1);
+            assertTrue(e.getMessage().contains("id"));
         }
 
 
@@ -148,8 +145,7 @@ public class RuleTest extends TestCase {
 
         } catch (final AssertionFailedError e) {
 
-            final String message = e.getMessage();
-            assertTrue(message.indexOf("id") > -1);
+            assertTrue(e.getMessage().contains("id"));
         }
     }
 
@@ -180,8 +176,7 @@ public class RuleTest extends TestCase {
 
         } catch (final AssertionFailedError e) {
 
-            final String message = e.getMessage();
-            assertTrue(message.indexOf("comment") > -1);
+            assertTrue(e.getMessage().contains("comment"));
         }
     }
 
@@ -242,8 +237,7 @@ public class RuleTest extends TestCase {
 
         } catch (final AssertionFailedError e) {
 
-            final String message = e.getMessage();
-            assertTrue(message.indexOf("violation") > -1);
+            assertTrue(e.getMessage().contains("violation"));
         }
 
 
@@ -254,8 +248,7 @@ public class RuleTest extends TestCase {
 
         } catch (final AssertionFailedError e) {
 
-            final String message = e.getMessage();
-            assertTrue(message.indexOf("violation") > -1);
+            assertTrue(e.getMessage().contains("violation"));
         }
 
 
@@ -279,8 +272,7 @@ public class RuleTest extends TestCase {
 
         } catch (final IllegalArchitectureRuleException e) {
 
-            final String message = e.getMessage();
-            assertTrue(message.indexOf("com.seventytwomiles.dao") > -1);
+            assertTrue(e.getMessage().contains("com.seventytwomiles.dao"));
         }
 
 
@@ -291,8 +283,7 @@ public class RuleTest extends TestCase {
 
         } catch (final AssertionFailedError e) {
 
-            final String message = e.getMessage();
-            assertTrue(message.indexOf("violation") > -1);
+            assertTrue(e.getMessage().contains("violation"));
         }
 
 
@@ -303,8 +294,7 @@ public class RuleTest extends TestCase {
 
         } catch (final AssertionFailedError e) {
 
-            final String message = e.getMessage();
-            assertTrue(message.indexOf("violation") > -1);
+            assertTrue(e.getMessage().contains("violation"));
         }
     }
 
@@ -340,7 +330,7 @@ public class RuleTest extends TestCase {
 
         String description = rule.describe();
 
-        assertTrue(description.indexOf("web") > -1);
-        assertTrue(description.indexOf("com.seventytwomiles.web") > -1);
+        assertTrue(description.contains("web"));
+        assertTrue(description.contains("com.seventytwomiles.web"));
     }
 }

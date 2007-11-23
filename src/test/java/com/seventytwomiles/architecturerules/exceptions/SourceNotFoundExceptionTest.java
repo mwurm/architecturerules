@@ -96,10 +96,13 @@ public class SourceNotFoundExceptionTest extends TestCase {
         message = exception.getMessage();
         cause = exception.getCause();
 
-        assertTrue(message.indexOf("core/target/classes") > -1);
-        assertTrue(message.indexOf("util/target/classes") > -1);
-        assertTrue(message.indexOf("parent-pom/target/classes") > -1);
-        assertTrue(message.indexOf("web/target/classes") > -1);
+        assertTrue(message.contains("core/target/classes"));
+        assertTrue(message.contains("util/target/classes"));
+        assertTrue(message.contains("parent-pom/target/classes"));
+        assertTrue(message.contains("web/target/classes"));
+
+        /* TODO: why tf does the following assert fail? */
+        // assertTrue(message.contains("unable to find any source files in given source directories [web/target/classes, core/target/classes, parent-pom/target/classes, util/target/classes]"));
 
         assertEquals(null, cause);
     }
