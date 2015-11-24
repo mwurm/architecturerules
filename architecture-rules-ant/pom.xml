@@ -153,18 +153,6 @@
                 <checksumPolicy>ignore</checksumPolicy>
             </snapshots>
         </repository>
-        <repository>
-            <id>spring</id>
-            <url>
-                https://svn.sourceforge.net/svnroot/springframework/repos/repo
-            </url>
-            <releases>
-                <checksumPolicy>ignore</checksumPolicy>
-            </releases>
-            <snapshots>
-                <checksumPolicy>ignore</checksumPolicy>
-            </snapshots>
-        </repository>
     </repositories>
 
     <pluginRepositories>
