@@ -183,12 +183,6 @@
             </plugin>
         </plugins>
     </reporting>
-    <repositories>
-      <repository>
-	<id>java.net2</id>
-	<url>http://download.java.net/maven/2/</url>
-      </repository>
-    </repositories>
     <build>
       <extensions>
 	<extension>
