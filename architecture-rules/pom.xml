@@ -61,9 +61,9 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-          <groupId>SnakeYAML</groupId>
-          <artifactId>SnakeYAML</artifactId>
-          <version>1.2</version>
+          <groupId>org.yaml</groupId>
+          <artifactId>snakeyaml</artifactId>
+          <version>1.16</version>
         </dependency>
     </dependencies>
 
@@ -231,11 +231,6 @@
             <snapshots>
                 <checksumPolicy>ignore</checksumPolicy>
             </snapshots>
-        </repository>
-        <repository>
-          <id>snakeyaml</id>
-          <name>SnakeYAML repository</name>
-          <url>http://snakeyamlrepo.appspot.com/repository</url>
         </repository>
     </repositories>
 

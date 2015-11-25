@@ -22,7 +22,6 @@ import org.architecturerules.configuration.AbstractConfigurationFactory;
 import org.architecturerules.domain.Rule;
 import org.architecturerules.domain.SourceDirectory;
 
-import org.yaml.snakeyaml.Loader;
 import org.yaml.snakeyaml.TypeDescription;
 import org.yaml.snakeyaml.Yaml;
 import org.yaml.snakeyaml.constructor.Constructor;
@@ -57,7 +56,7 @@ public class YamlConfigurationFactory extends AbstractConfigurationFactory {
         typeDescription.putListPropertyType("listeners", String.class);
         rootConstructor.addTypeDescription(typeDescription);
 
-        YamlConfiguration loadedConfguration = (YamlConfiguration) new Yaml(new Loader(rootConstructor)).load(configuration);
+        YamlConfiguration loadedConfguration = (YamlConfiguration) new Yaml(rootConstructor).load(configuration);
 
         setDoCyclicDependencyTest(loadedConfguration.isDoCyclicDependencyTest());
         setThrowExceptionWhenNoPackages(loadedConfguration.isThrowExceptionWhenNoPackages());
