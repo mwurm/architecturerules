@@ -17,7 +17,16 @@ package org.architecturerules.configuration.xml;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.StringReader;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Properties;
+import java.util.Set;
+import java.util.TreeSet;
+
+import javax.xml.parsers.ParserConfigurationException;
 
 import org.apache.commons.digester.Digester;
 import org.apache.commons.logging.Log;
@@ -93,17 +102,14 @@ public class DigesterConfigurationFactory extends AbstractConfigurationFactory {
     @Override
     protected void validateConfiguration(final String configurationXml) {
 
-        final Digester digester = getDigester();
-
-        final StringReader configurationReader = new StringReader(configurationXml);
-
         try {
 
-            digester.parse(configurationReader);
-        } catch (final IOException e) {
+            final Digester digester = getDigester();
 
-            throw new InvalidConfigurationException("configuration xml file contains invalid configuration properties", e);
-        } catch (final SAXException e) {
+            final StringReader configurationReader = new StringReader(configurationXml);
+
+            digester.parse(configurationReader);
+        } catch (final Exception e) {
 
             throw new InvalidConfigurationException("configuration xml file contains invalid configuration properties", e);
         }
@@ -128,11 +134,7 @@ public class DigesterConfigurationFactory extends AbstractConfigurationFactory {
             processRules(configurationXml);
             processCyclicDependencyConfiguration(configurationXml);
             processSourcesNotFoundConfiguration(configurationXml);
-        } catch (final IOException e) {
-
-            /* Can this be handled better? Should it be? */
-            throw new RuntimeException(e);
-        } catch (final SAXException e) {
+        } catch (final Exception e) {
 
             /* Can this be handled better? Should it be? */
             throw new RuntimeException(e);
@@ -141,7 +143,7 @@ public class DigesterConfigurationFactory extends AbstractConfigurationFactory {
 
 
     void processProperties(final String xml)
-            throws IOException, SAXException {
+            throws IOException, SAXException, ParserConfigurationException {
 
         final Digester digester = getDigester();
         digester.addObjectCreate(XmlConfiguration.properties, Properties.class);
@@ -179,7 +181,7 @@ public class DigesterConfigurationFactory extends AbstractConfigurationFactory {
 
 
     void processListeners(final String xml)
-            throws IOException, SAXException {
+            throws IOException, SAXException, ParserConfigurationException {
 
         final Set<String> includedListenerClassNames = new HashSet<String>();
         final Set<String> excludeListenerClassNames = new HashSet<String>();
@@ -193,7 +195,7 @@ public class DigesterConfigurationFactory extends AbstractConfigurationFactory {
 
 
     private Set<String> getListenerClassNames(final String xml, final String path)
-            throws IOException, SAXException {
+            throws IOException, SAXException, ParserConfigurationException {
 
         final Digester digester = getDigester();
         digester.addObjectCreate(XmlConfiguration.listeners, ArrayList.class);
@@ -239,9 +241,10 @@ public class DigesterConfigurationFactory extends AbstractConfigurationFactory {
      * @param xml String xml to parse
      * @throws IOException  when an input/output error occurs
      * @throws SAXException when given xml can not be parsed
+     * @throws ParserConfigurationException
      */
     void processSources(final String xml)
-            throws IOException, SAXException {
+            throws IOException, SAXException, ParserConfigurationException {
 
         final Digester digester = getDigester();
 
@@ -274,9 +277,10 @@ public class DigesterConfigurationFactory extends AbstractConfigurationFactory {
      * @param xml String xml to parse
      * @throws IOException  when an input/output error occurs
      * @throws SAXException when given xml can not be parsed
+     * @throws ParserConfigurationException
      */
     void processRules(final String xml)
-            throws IOException, SAXException {
+            throws IOException, SAXException, ParserConfigurationException {
 
         final Digester digester = getDigester();
 
@@ -308,9 +312,10 @@ public class DigesterConfigurationFactory extends AbstractConfigurationFactory {
      * @param configurationXml String xml to parse
      * @throws IOException  when an input/output error occurs
      * @throws SAXException when given xml can not be parsed
+     * @throws ParserConfigurationException
      */
     void processCyclicDependencyConfiguration(final String configurationXml)
-            throws IOException, SAXException {
+            throws IOException, SAXException, ParserConfigurationException {
 
         final Digester digester = getDigester();
 
@@ -351,9 +356,10 @@ public class DigesterConfigurationFactory extends AbstractConfigurationFactory {
      * @param configurationXml String xml to parse
      * @throws IOException  when an input/output error occurs
      * @throws SAXException when given xml can not be parsed
+     * @throws ParserConfigurationException
      */
     void processSourcesNotFoundConfiguration(final String configurationXml)
-            throws IOException, SAXException {
+            throws IOException, SAXException, ParserConfigurationException {
 
         final Digester digester = getDigester();
 
@@ -392,17 +398,35 @@ public class DigesterConfigurationFactory extends AbstractConfigurationFactory {
      * <p>Configures a Digester</p>
      *
      * @return Digester
+     * @throws ParserConfigurationException
      */
-    private Digester getDigester() {
-
-        final SaxErrorHandler errorHandler = new SaxErrorHandler();
+    private Digester getDigester()
+            throws ParserConfigurationException {
 
         final Digester digester = new Digester();
+        enableValidation(digester);
+
+        final SaxErrorHandler errorHandler = new SaxErrorHandler();
         digester.setErrorHandler(errorHandler);
-        digester.setValidating(true);
         digester.setEntityResolver(new DtdEntityResolver());
 
         return digester;
+    }
+
+
+    private void enableValidation(final Digester digester)
+            throws ParserConfigurationException {
+
+        digester.setValidating(true);
+
+        try {
+
+            digester.setFeature("http://apache.org/xml/features/validation/dynamic", true);
+        } catch (SAXException e) {
+
+            log.warn("XML parser will validate the document even if a grammar is NOT specified");
+            log.debug("Failed to setup on-demand XML validation", e);
+        }
     }
 
     private static final Set<String> SUPPORTED_FILE_TYPES = new TreeSet<String>(String.CASE_INSENSITIVE_ORDER) {

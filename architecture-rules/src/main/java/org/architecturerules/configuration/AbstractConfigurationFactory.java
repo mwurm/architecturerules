@@ -9,20 +9,21 @@
  *
  * For more information visit
  *         http://wiki.architecturerules.org/ and
- *         http://blog.architecturerules.org
+ *         http://blog.architecturerules.org/
  */
 package org.architecturerules.configuration;
 
 
+import java.io.*;
+import java.util.*;
+
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+
 import org.architecturerules.api.configuration.ConfigurationFactory;
 import org.architecturerules.domain.Rule;
 import org.architecturerules.domain.SourceDirectory;
-
-import java.io.*;
-import java.util.*;
 
 
 /**
