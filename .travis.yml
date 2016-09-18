@@ -8,5 +8,7 @@ jdk:
   - oraclejdk8
   - oraclejdk7
   - openjdk7
-
+env:
+  global:
+  - TERM=dumb
 script: mvn -Dinvoker.debug=false clean verify
