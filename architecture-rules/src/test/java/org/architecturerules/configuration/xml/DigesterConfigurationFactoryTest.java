@@ -96,79 +96,103 @@ public class DigesterConfigurationFactoryTest extends AbstractDigesterTest {
     public void testProcessRules()
             throws Exception {
 
-        final DigesterConfigurationFactory factory = new DigesterConfigurationFactory();
+        final DigesterConfigurationFactory factory = new DigesterConfigurationFactory(  );
 
-        factory.processRules(rulesXmlConfiguration);
+        factory.processRules( rulesXmlConfiguration );
 
-        final List<Rule> rules = new ArrayList<Rule>();
-        rules.addAll(factory.getRules());
+        final List<Rule> rules = new ArrayList<Rule>(  );
+        rules.addAll( factory.getRules(  ) );
 
-        assertEquals(2, rules.size());
+        assertEquals( 2,
+                rules.size(  ) );
+
+
 
         /**
          * Validate values of the first Rule
          */
-        final Rule rule0 = rules.get(0);
+        final Rule rule0 = rules.get( 0 );
 
         /* id */
-        assertEquals("model", rule0.getId());
+        assertEquals( "dao",
+                rule0.getId(  ) );
 
         /* comment */
-        assertEquals("Model should remain completely isolated", rule0.getComment());
+        assertEquals( "The dao interface package should rely on nothing.",
+                rule0.getComment(  ) );
 
         /* packages */
-        assertEquals(1, rule0.getPackages().size());
+        assertEquals( 2,
+                rule0.getPackages(  ).size(  ) );
 
-        assertEquals("com.seventytwomiles.pagerank.core.model", rule0.getPackages().toArray()[0].toString());
+        Object[] packagesToTest = rule0.getPackages(  ).toArray(  );
+        Arrays.sort( packagesToTest );
 
-        Object[] violations = rule0.getViolations().toArray();
-        Arrays.sort(violations);
+        assertEquals( "com.seventytwomiles.pagerank.core.dao",
+                packagesToTest[0].toString(  ) );
 
-        assertEquals(6, rule0.getViolations().size());
+        assertEquals( "com.seventytwomiles.pagerank.core.dao.hibernate",
+                packagesToTest[1].toString(  ) );
 
-        assertEquals("com.seventytwomiles.pagerank.core.services", violations[3].toString());
+        /* violations */
+        assertEquals( 3,
+                rule0.getViolations(  ).size(  ) );
 
-        assertEquals("com.seventytwomiles.pagerank.core.builder", violations[0].toString());
+        Object[] violations = rule0.getViolations(  ).toArray(  );
+        Arrays.sort( violations );
 
-        assertEquals("com.seventytwomiles.pagerank.core.dao", violations[1].toString());
+        assertEquals( "com.seventytwomiles.pagerank.core.services",
+                violations[1].toString(  ) );
 
-        assertEquals("com.seventytwomiles.pagerank.core.strategy", violations[4].toString());
+        assertEquals( "com.seventytwomiles.pagerank.core.builder",
+                violations[0].toString(  ) );
 
-        assertEquals("com.seventytwomiles.pagerank.core.dao.hibernate", violations[2].toString());
-        assertEquals("com.seventytwomiles.pagerank.util", violations[5].toString());
+        assertEquals( "com.seventytwomiles.pagerank.util",
+                violations[2].toString(  ) );
+
 
         /**
          * Validate values of the second Rule
          */
-        final Rule rule1 = rules.get(1);
+        final Rule rule1 = rules.get( 1 );
 
         /* id */
-        assertEquals("dao", rule1.getId());
+        assertEquals( "model",
+                rule1.getId(  ) );
 
         /* comment */
-        assertEquals("The dao interface package should rely on nothing.", rule1.getComment());
+        assertEquals( "Model should remain completely isolated",
+                rule1.getComment(  ) );
 
         /* packages */
-        assertEquals(2, rule1.getPackages().size());
+        assertEquals( 1,
+                rule1.getPackages(  ).size(  ) );
 
-        Object[] packagesToTest = rule1.getPackages().toArray();
-        Arrays.sort(packagesToTest);
+        assertEquals( "com.seventytwomiles.pagerank.core.model",
+                rule1.getPackages(  ).toArray(  )[0].toString(  ) );
 
-        assertEquals("com.seventytwomiles.pagerank.core.dao", packagesToTest[0].toString());
+        violations = rule1.getViolations(  ).toArray(  );
+        Arrays.sort( violations );
 
-        assertEquals("com.seventytwomiles.pagerank.core.dao.hibernate", packagesToTest[1].toString());
+        assertEquals( 6,
+                rule1.getViolations(  ).size(  ) );
 
-        /* violations */
-        assertEquals(3, rule1.getViolations().size());
+        assertEquals( "com.seventytwomiles.pagerank.core.services",
+                violations[3].toString(  ) );
 
-        violations = rule1.getViolations().toArray();
-        Arrays.sort(violations);
+        assertEquals( "com.seventytwomiles.pagerank.core.builder",
+                violations[0].toString(  ) );
 
-        assertEquals("com.seventytwomiles.pagerank.core.services", violations[1].toString());
+        assertEquals( "com.seventytwomiles.pagerank.core.dao",
+                violations[1].toString(  ) );
 
-        assertEquals("com.seventytwomiles.pagerank.core.builder", violations[0].toString());
+        assertEquals( "com.seventytwomiles.pagerank.core.strategy",
+                violations[4].toString(  ) );
 
-        assertEquals("com.seventytwomiles.pagerank.util", violations[2].toString());
+        assertEquals( "com.seventytwomiles.pagerank.core.dao.hibernate",
+                violations[2].toString(  ) );
+        assertEquals( "com.seventytwomiles.pagerank.util",
+                violations[5].toString(  ) );
     }
 
 
