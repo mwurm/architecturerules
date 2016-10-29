@@ -6,7 +6,5 @@ cache:
 
 jdk:
   - oraclejdk8
-  - oraclejdk7
-  - openjdk7
 
 script: mvn -Dinvoker.debug=false clean verify
