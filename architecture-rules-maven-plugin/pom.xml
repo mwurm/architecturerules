@@ -69,7 +69,7 @@
                 <artifactId>maven-invoker-plugin</artifactId>
                 <version>1.3</version>
                 <configuration>
-                    <debug>true</debug>
+                    <debug>false</debug>
                     <showErrors>true</showErrors>
                     <projectsDirectory>src/test/resources/</projectsDirectory>
                     <cloneProjectsTo>${project.build.directory}/it</cloneProjectsTo>
